@@ -1,0 +1,142 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <form id="dataSetForm">
+        <div class="ibox-title">
+            <h5>订单设置</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="form-horizontal">
+                <div class="col-sm-10">
+                    <div class="form-group">
+                        <label class="col-sm-3  control-label">正常订单超过</label>
+                        <div class="col-sm-8" style="display: flex;">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="${overTimeData!}" id="overTime" name="overTime">
+                                <div class="input-group-addon">分</div>
+                            </div>
+                            <div style="margin-top: 6px;margin-left: 15px;">未付款，订单自动关闭（最高60分钟）</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3  control-label">发货超过</label>
+                        <div class="col-sm-8" style="display: flex;">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="${sendData!}"  id="send" name="send">
+                                <div class="input-group-addon">天</div>
+                            </div>
+                            <div style="margin-top: 6px;margin-left: 15px;">未收货，订单自动完成</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3  control-label">收货完成超过</label>
+                        <div class="col-sm-8" style="display: flex;"style="display: flex;">
+                            <div class="input-group" >
+                                <input type="text" class="form-control" value="${getData!}" id="get" name="get">
+                                <div class="input-group-addon">天</div>
+                            </div>
+                            <div style="margin-top: 6px;margin-left: 15px;">自动结束交易，不能申请售后(最高30天)</div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10 text-center">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="exchangeEditSubmit()"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script>
+
+    function exchangeEditSubmit() {
+        $("#dataSetForm").bootstrapValidator('validate');//提交验证
+        if ($("#dataSetForm").data('bootstrapValidator').isValid()) {
+            Feng.confirm("确定要提交修改吗", function () {
+                var overTime = $("#overTime").val();
+                var send = $("#send").val();
+                var get = $("#get").val();
+                var ajax = new $ax(Feng.ctxPath + "/systemDataSet/doExchangeOrderSet", function (data) {
+                    Feng.success("设置成功")
+                    setTimeout(function () {
+                        window.location.reload();
+                    },500)
+
+                }, function (data) {
+                    Feng.error("修改失败!" + data.responseJSON.msg + "!");
+                })
+                ajax.set("overTime", overTime)
+                ajax.set("send", send)
+                ajax.set("get", get)
+                ajax.start()
+            })
+        }
+    }
+
+</script>
+
+<script>
+    $(function () {
+        $("#dataSetForm").bootstrapValidator({
+            live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+            excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+            submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+            message: '通用的验证失败消息',//好像从来没出现过
+            feedbackIcons: {//根据验证结果显示的各种图标
+                valid: 'glyphicon glyphicon-ok',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                overTime: {
+                    validators: {
+                        notEmpty: {//检测非空,radio也可用
+                            message: '*请填写正常订单超时时长'
+                        },
+                        regexp:{
+                            regexp:/^[1-9]\d*$/,
+                            message:"填写正常订单超时时间有误"
+                        },
+                        lessThan: {
+                            value : 60,
+                            message : '最大输入60'
+                        }
+                    }
+                },
+                send: {
+                    validators: {
+                        notEmpty: {//检测非空,radio也可用
+                            message: '*请填写发货超时时长'
+                        },
+                        regexp:{
+                            regexp:/^[1-9]\d*$/,
+                            message:"填写发货超时时长有误"
+                        }
+                    }
+                },
+                get: {
+                    validators: {
+                        notEmpty: {//检测非空,radio也可用
+                            message: '*请填写收货完成超时时长'
+                        },
+                        regexp:{
+                            regexp:/^[1-9]\d*$/,
+                            message:"填写收货完成超时时长有误"
+                        },
+                        lessThan: {
+                            value : 30,
+                            message : '最大输入30'
+                        }
+                    }
+                }
+            }
+        });
+    })
+
+</script>
+
+@}

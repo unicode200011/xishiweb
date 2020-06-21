@@ -1,0 +1,59 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="agentNumNo" readonly="readonly" name="代理商编号" value="${item.agentNum}"/>
+                    <#input id="createTimeNo" readonly="readonly" name="申请时间" value="${dateUtil.formatDateTime(item.createTime)}"/>
+                    <#input id="agentUserName" readonly="readonly" name="代理人姓名" value="${item.agentUserName}" />
+                    <#input id="card" readonly="readonly" name="身份证信息" value="${item.card}"/>
+                    <#input id="agentPhone" readonly="readonly" name="绑定手机号" value="${item.agentPhone}"/>
+                    <#input id="agentName" readonly="readonly" name="家族名称" value="${item.agentName}"/>
+                    <#easyupload  valueType="image" id="agentLogo" readonly="readonly" name="家族Logo" value="${item.agentLogo}"/>
+                    <#textarea id="agentIntro" name="家族简介" value="${item.agentIntro}"/>
+                </div>
+                <div class="col-sm-6">
+                <#easyupload id="cardFront" readonly="readonly" value="${item.cardFront}" valueType="image" name="身份证正面照"/>
+                <#easyupload id="cardBack" readonly="readonly" value="${item.cardBack}" valueType="image" name="身份证反面照"/>
+                </div>
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12 text-center">
+                    @if(item.auditState == 0){
+                    <#button btnCss="info" name="驳回" id="ensure" icon="fa-remove" clickFun="AgentInfoDlg.refuse()"/>
+                    <#button btnCss="info" name="通过" id="ensure" icon="fa-check" clickFun="AgentInfoDlg.pass()"/>
+                    @}
+                    <#button btnCss="danger" name="返回" id="cancel" icon="fa-edit" clickFun="AgentInfoDlg.close()"/>
+                    <#button btnCss="danger" name="重置密码" id="cancel" icon="fa-eraser" clickFun="AgentInfoDlg.resetPwd()"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="ibox-title">
+                    <h5>审核记录</h5>
+                </div>
+                <div class="ibox-content">
+                    @for(record in records){
+                        <div class="row">
+                            <div class="col-sm-3">
+                                    ${dateUtil.formatDateTime(record.createTime)}
+                            </div>
+                            <div class="col-sm-5">
+                                ${record.remark}
+                            </div>
+                        </div>
+                    @}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/agentManage/agent/agent_info.js"></script>
+@}

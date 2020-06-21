@@ -1,0 +1,78 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url(../images/relianbapc_bg.png);
+    background-size: cover;
+    background-color: #212121;
+}
+.content { width: 1200px; margin: 0 auto;}
+.content_left { width: 50%; float: left; padding-top: 214px;}
+.content_right { width: 50%; float: right;}
+
+/*left*/
+.logo_pc_img { float: left;}
+.logopc_word { float: left; padding-left: 15px;}
+
+.erweima_img { float: left; width: 189px; padding-top: 136px;}
+.erweima_word { padding-top: 16px;}
+.btn_load { float: left; padding-top: 170px; padding-left: 38px;}
+
+.btn_ios { width: 206px; height: 68px;}
+.btn_and { width: 206px; height: 68px; margin-top: 20px;}
+
+/*right*/
+.phone_pc { margin-top: 190px;}
+
+/*footer*/
+.footer { width: 100%;}
+.ulnav { width: 312px; padding-top: 80px; margin: 0 auto;}
+.ulnav ul li {
+    float: left;
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+    list-style: none;
+    width: 100px;
+    border-right: 3px solid #ffffff;
+    border-left: 3px solid #ffffff;
+}
+.ulnav ul li:hover { color: #b5b5b5; cursor: pointer;}
+.footer_p { font-size: 14px; text-align: center; color: #ffffff; padding-top: 25px; padding-bottom: 25px;}
+
+
+/*弹出层CSS*/
+
+.shadow {
+    background: #000;
+    opacity: 0.4;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 997;
+    display: none;
+}
+.forms {
+    display: none;
+    width: 1000px;
+    height: 800px;
+    background: #FFFFFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 998;
+    overflow:auto;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+.yinsi_div { width: 100%; position: relative;}
+.close { position: absolute; right: 30px; top: 37px; cursor: pointer;}
+.yinsi_head { text-align: center; color: #4db53a; font-size: 24px; font-family: "黑体"; padding-top: 32px;}
+.yinsi_word { width: 90%; margin: 10px auto; padding-top: 33px;}
+.yinsi_word p { font-size: 14px; color: #333333; line-height: 20px; font-family: "微软雅黑"; padding-top: 10px; padding-bottom: 10px;}
+.p_weiht { font-weight: bold;}

@@ -1,0 +1,94 @@
+@charset "utf-8";
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "微软雅黑";
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+input {
+  outline: none;
+  border: none;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+#content {
+  display: none;
+  background: url(../images/bg.png);
+  background-size: 100% 100%;
+}
+#content .content {
+  width: 100%;
+}
+#content .content .logo {
+  padding-top: 1rem;
+  text-align: center;
+  font-size: 0;
+}
+#content .content .logo p {
+  display: inline-block;
+  width: 1.86rem;
+  height: 0.62rem;
+}
+#content .content .logo span {
+  display: block;
+  font-size: 0.3rem;
+  color: #FFFFFF;
+  margin-top: 0.2rem;
+}
+#content .content .box_img {
+  width: 6.2rem;
+  height: 7rem;
+  margin: 0 auto;
+  margin-top: 0.6rem;
+}
+#content .content .btn {
+  width: 3.2rem;
+  height: 1.1rem;
+  margin: 0 auto;
+  margin-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+#weixin {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  padding-top: 4rem;
+  z-index: 1111;
+}
+#weixin img {
+  position: absolute;
+  top: 0;
+  right: 0.1rem;
+}
+#weixin p {
+  color: #fff;
+  font-size: 0.3rem;
+  line-height: 0.6rem;
+  padding-left: 20%;
+}
+#weixin p span {
+  display: inline-block;
+  text-align: center;
+  width: 0.4rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  background: #999999;
+  color: #fff;
+  border-radius: 50%;
+  margin-right: 0.2rem;
+}

@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <form id="validatorForm">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+
+                <input type="hidden" id="id" value="">
+
+                <div class="row">
+                    <div class="col-sm-10">
+                                <#input id="id" name=""/>
+                                <#input id="userId" name=""/>
+                                <#input id="liveRecordId" name=""/>
+                                <#input id="createTime" name=""/>
+                                <#input id="endTime" name="退出时间"/>
+                                <#input id="state" name="是否退出直播间 0：否 1：是"/>
+                                <#input id="time" name=""/>
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10 text-center">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="WatchRecordInfoDlg.addSubmit()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="WatchRecordInfoDlg.close()"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="${ctxPath}/static/modular/userManage/watchRecord/watchRecord_info.js"></script>
+@}

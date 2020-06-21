@@ -1,0 +1,54 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>主播管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#SelectCon id="state" name="用户状态">
+                                    <option value="">全部</option>
+                                    <option value="0">正常</option>
+                                    <option value="1">禁用</option>
+                                </#SelectCon>
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="xishiNum" name="西施号" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="name" name="用户昵称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="phone" name="绑定手机号" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="User.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="UserTableToolbar" role="group">
+                            @if(shiro.hasPermission("/userShower/add")){
+                                <#button name="启用" icon="fa-plus" clickFun="User.start()"/>
+                            @}
+                            @if(shiro.hasPermission("/userShower/update")){
+                                <#button name="查看" icon="fa-edit" clickFun="User.openUserDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/userShower/delete")){
+                                <#button name="禁用" icon="fa-remove" clickFun="User.stop()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/user/del")){
+                            <#button name="删除" icon="fa-remove" clickFun="User.del()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="UserTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/userManage/user/shower.js"></script>
+@}

@@ -1,0 +1,275 @@
+/**视频页面*/
+.header {
+    /*height: 138px;*/
+    height: 110px;
+}
+
+.logoDiv {
+    position: relative;
+    margin: 5px 0px 20px 15px;
+    float: left
+}
+
+.logo {
+    width: 94px;
+    height: 94px;
+    border-radius: 50%;
+}
+
+.addLogo {
+    position: absolute;
+    bottom: 0px;
+    width: 24px;
+    left: 35px;
+}
+
+.username {
+    padding-top: 48px;
+    padding-left: 20px;
+    float: left
+}
+
+.video {
+    position: relative;
+}
+
+/*.content video {*/
+/*width: 100%;*/
+/*margin: 20px auto 50px;*/
+/*object-fit: fill;*/
+/*height: 360px;*/
+/*}*/
+
+.content video {
+    width: 100%;
+    position: relative;
+
+    margin: 5px auto 15px;
+
+    padding-bottom: 0%; /* 62% 需要用padding来维持16:9比例,也就是9除以16*/
+    height: 0;
+}
+
+.videoMp4 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+
+
+.playImg {
+    position: absolute;
+    left: 45%;
+    top: 107px;
+}
+
+.content .title {
+
+    text-align: left;
+}
+
+.nav ul {
+    width: 100%;
+    padding: 0px;
+}
+
+.nav ul li {
+    float: left;
+    list-style-type: none;
+    width: 33%;
+    text-align: center;
+}
+
+.nav ul li img {
+
+    width: 30%;
+}
+
+.nav ul li span {
+    display: block;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    background: rgba(255, 255, 255, 1);
+    color: #000;
+    height: 40px;
+    line-height: 40px;
+    width: 90%;
+    padding: 0px 5%;
+
+}
+
+.downApp {
+    float: right;
+    background-color: #FF007E;
+    color: #fff;
+    border-radius: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 5px;
+    padding: 0px 5px;
+    /*display: block;*/
+}
+
+/*主播页面*/
+.userInfo {
+    border-top: 1px solid #676767;
+    margin: 0px 15px;
+}
+
+.ageSpan {
+    background-color: #3DA1FF;
+    padding: 2px 10px;
+    border-radius: 18px;
+}
+
+.addressSpan {
+    background-color: #FF007E;
+    padding: 2px 10px;
+    border-radius: 18px;
+}
+
+.constellationSpan {
+    background-color: #9600FF;
+    padding: 2px 10px;
+    border-radius: 18px;
+}
+
+.navDiv ul {
+    width: 100%;
+    padding: 0px;
+    margin-left: 25%;
+}
+
+.navDiv ul li {
+    float: left;
+    list-style-type: none;
+    width: 25%;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    padding-left: 10px;
+}
+
+.navDiv ul li:first-child {
+    border-right: 1px solid #ffffff;
+    padding-right: 10px !important;
+    padding-left: 0px !important;
+}
+
+.navDiv ul li .active {
+    border-bottom: 2px solid #FFC425;
+}
+
+.navDiv ul li span {
+    display: block;
+}
+
+.contentInfo ul {
+    width: 100%;
+    padding: 0px;
+    margin-top: 12%;
+
+}
+
+.contentInfo ul li {
+    width: 33%;
+    float: left;
+    list-style-type: none;
+    height: 165px;
+    padding-bottom: 1px;
+    padding-left: 1px;
+}
+
+.contentInfo ul li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+/**index页面*/
+#lunbobox {
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+
+.lunbo {
+    width: 100%;
+    height: 200px;
+}
+
+.lunbo img {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#lunbobox ul {
+    width: 60%;
+    position: absolute;
+    bottom: 10px;
+    right: 0px;
+    z-index: 5;
+    text-align: center;
+}
+
+#lunbobox ul li {
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #cccccc;
+    float: left;
+    list-style: none;
+    background: #cccccc;
+    text-align: center;
+    margin: 0px 5px 0px 0px;
+    border-radius: 50%;
+}
+
+#toleft {
+    display: none;
+    width: 30px;
+    height: 100px;
+    font-size: 40px;
+    line-height: 100px;
+    text-align: center;
+    color: #f4f4f4;
+    /*background:#cccccc;
+    */
+    /*background:url("../images/toleft.jpg")no-repeat center;
+	*/
+    position: absolute;
+    top: 90px;
+    left: 12px;
+    cursor: pointer;
+    z-index: 99;
+    opacity: 0.4;
+}
+
+#toright {
+    display: none;
+    width: 30px;
+    height: 100px;
+    font-size: 40px;
+    line-height: 100px;
+    text-align: center;
+    color: #f4f4f4;
+    /*background:#cccccc;
+    */
+    position: absolute;
+    top: 90px;
+    right: 0px;
+    cursor: pointer;
+    z-index: 99;
+    opacity: 0.4;
+}

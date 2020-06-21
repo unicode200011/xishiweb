@@ -1,0 +1,52 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+                    <#input id="agentName" name="家族名称" value="${item.agentName}"/>
+                    <#easyupload  valueType="image" id="agentLogo"  name="家族Logo" value="${item.agentLogo}"/>
+                    <#textarea id="agentIntro" name="家族简介" value="${item.agentIntro}"/>
+                    <input type="hidden" id="userId" value="${item.userId}" />
+            </div>
+            </div>
+
+            <div class="row">
+                <div class="ibox-title">
+                    <h5>账户信息</h5>
+                </div>
+                <div class="ibox-content">
+                    @for(bankUser in bankUsers){
+                        <div class="row">
+                            <div class="col-sm-4">
+                                账户名称: ${bankUser.userAccountName}
+                            </div>
+                            <div class="col-sm-4">
+                                账户号码: ${bankUser.bankCard}
+                            </div>
+                            <div class="col-sm-4">
+                                二维码: <img src="${bankUser.qrcode}" width="50px" height="50px"/> &nbsp&nbsp <label onclick="AgentInfoDlg.delete(${bankUser.id})" style="cursor:pointer;">删除</label>
+                            </div>
+
+                        </div>
+                    @}
+                </div>
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12 text-center">
+                    <#button btnCss="info" name="添加" id="cancel" icon="fa-edit" clickFun="AgentInfoDlg.openInfo()"/>
+                    <#button btnCss="info" name="保存" id="cancel" icon="fa-eraser" clickFun="AgentInfoDlg.editSubmit()"/>
+                    <#button btnCss="info" name="返回" id="cancel" icon="fa-edit" clickFun="AgentInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/agentManage/agent/agent_info.js"></script>
+@}

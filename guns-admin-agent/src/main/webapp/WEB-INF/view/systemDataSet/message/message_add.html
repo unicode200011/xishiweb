@@ -1,0 +1,35 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <form id="validatorForm">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+
+                <input type="hidden" id="id" value="">
+
+                <div class="row">
+                    <div class="col-sm-10">
+                                <#input id="id" name=""/>
+                                <#input id="title" name="标题"/>
+                                <#input id="content" name="内容"/>
+                                <#input id="msgType" name="类型: 0 打赏消息 1 礼物消息 2 粉丝消息 3 直播消息 4 系统消息"/>
+                                <#input id="recType" name="接收类型(系统消息有效) 0 全部用户 1 所有用户 2 所有主播 3 自定义用户"/>
+                                <#input id="userId" name="用户ID(系统消息无效)"/>
+                                <#input id="oneLinkId" name="与之关联的用户/直播等"/>
+                                <#input id="twoLinkId" name="与之关联的直播/直播ID"/>
+                                <#input id="createTime" name=""/>
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10 text-center">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="MessageInfoDlg.addSubmit()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="MessageInfoDlg.close()"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="${ctxPath}/static/modular/systemDataSet/message/message_info.js"></script>
+@}

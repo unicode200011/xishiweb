@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <#input id="id" name="" value="${item.id}"/>
+                            <#input id="userId" name="被邀请用户id" value="${item.userId}"/>
+                            <#input id="createTime" name="邀请时间" value="${item.createTime}"/>
+                            <#input id="agentNum" name="家族编号" value="${item.agentNum}" />
+                            <#input id="joinState" name="是否同意：0 未处理 1 已同意 2：已拒绝" value="${item.joinState}"/>
+                            <#input id="type" name="类型 0：用户申请  1：打理人邀请" value="${item.type}"/>
+                            <#input id="state" name="状态：0：正常 1：已过期" value="${item.state}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 text-center">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="AgentInviteInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="AgentInviteInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/agentManage/agentInvite/agentInvite_info.js"></script>
+@}

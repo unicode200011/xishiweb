@@ -1,0 +1,35 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <form id="validatorForm">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+
+                <input type="hidden" id="id" value="">
+                <input type="hidden" id="rgb" value="FFFFFF">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <#input id="level" name="主播等级"/>
+                        <#easyupload id="image" name="等级标识"/>
+                        <#input id="amount" name="达标金额"/>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">等级颜色</label>
+                            <div class="col-sm-9">
+                                <input class="form-control jscolor {onFineChange:'update(this)'}" id="color" name="color" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10 text-center">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="LiveGradeInfoDlg.addSubmit()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="LiveGradeInfoDlg.close()"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="${ctxPath}/static/modular/levelManage/liveGrade/liveGrade_info.js"></script>
+@}

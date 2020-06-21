@@ -1,0 +1,28 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <form id="validatorForm">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+
+                <input type="hidden" id="id" value="">
+
+                <div class="row">
+                    <div class="col-sm-10">
+                        <#input id="gbMoney" name="提现西施币" />
+                        <#input id="remark" name="备注" />
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10 text-center">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="WithdrawalSetInfoDlg.addSubmit()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="WithdrawalSetInfoDlg.close()"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="${ctxPath}/static/modular/moneyManage/withdrawalSet/withdrawalSet_info.js"></script>
+@}

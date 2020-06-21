@@ -1,0 +1,42 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <form id="validatorForm">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+
+                <input type="hidden" id="id" value="">
+
+                <div class="row">
+                    <div class="col-sm-10">
+                                <#input id="id" name=""/>
+                                <#input id="liveId" name="直播id"/>
+                                <#input id="cover" name="直播封面"/>
+                                <#input id="name" name="直播标题"/>
+                                <#input id="liveWatchNow" name="当前观看人数"/>
+                                <#input id="liveWatchTotal" name="本场总管看人数"/>
+                                <#input id="showerName" name="主播名字"/>
+                                <#input id="showTime" name="已开播时长 分钟"/>
+                                <#input id="amount" name="本场直播当前总贡献量"/>
+                                <#input id="state" name="直播状态 0：正在直播 1：直播结束"/>
+                                <#input id="liveMode" name="直播模式 0：免费 1：密码模式 2：常规收费  3：计时收费"/>
+                                <#input id="livePrice" name="直播收费价格 收费模式有效  "/>
+                                <#input id="createTime" name="开始时间"/>
+                                <#input id="endTime" name="结束时间"/>
+                                <#input id="livePwd" name="密码  密码模式有效"/>
+                                <#input id="userId" name="用户id "/>
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10 text-center">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="LiveRecordInfoDlg.addSubmit()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="LiveRecordInfoDlg.close()"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="${ctxPath}/static/modular/liveManage/liveRecord/liveRecord_info.js"></script>
+@}

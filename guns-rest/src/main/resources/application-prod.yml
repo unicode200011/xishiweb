@@ -1,0 +1,67 @@
+server:
+  port: 8081
+  tomcat:
+    accept-count: 1024
+    max-connections: 10240
+    max-threads: 2048
+rest:
+  auth-open: true
+  sign-open: false
+  env-product: true # 是否正式环境 true 正式 false 测试
+  env-pay: true # 支付环境 true 正式 false 测试
+  env-sendMSG: true # 是否真实发送短信 true 发送 false 不发送
+guns:
+  file-upload-path: /home/project/relianba/upload/
+
+push:
+  model: false
+
+## elasticSearch集群 ##
+elasticsearch:
+  cluster-name: relianba
+  cluster-nodes: 172.16.56.132:9300,172.16.96.88:9300,172.16.96.89:9300
+  sniff: true
+
+spring:
+  http:
+    converters:
+      preferred-json-mapper: fastjson
+    multipart:
+      max-request-size: 100MB #最大请求大小
+      max-file-size: 100MB #最大文件大小
+  datasource:
+    url: jdbc:mysql://localhost:3306/relianba?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true
+    username: root
+    password: relianbaMysqlPassword&&
+    db-name: relianba
+    filters: log4j,wall,mergeStat
+    max-active: 1000
+    min-idle: 100
+
+  redis:
+    host: 127.0.0.1
+    password: root
+    port: 6379
+    pool:
+      max-idle: 100
+      min-idle: 1
+      max-active: 1000
+      max-wait: -1
+  freemarker:
+    enabled: true
+    cache: false
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    charset: UTF-8
+    content-type: text/html
+
+## 分布式锁 ##
+redisson:
+  address: redis://127.0.0.1:6379
+  password: root
+
+logging:
+  level.root: warn
+  level.com.stylefeng: info
+  path: /home/project/relianba/logs/
+  file: rest.log

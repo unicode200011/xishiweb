@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <form id="validatorForm">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+
+                <input type="hidden" id="id" value="">
+
+                <div class="row">
+                    <div class="col-sm-10">
+                                <#input id="id" name=""/>
+                                <#input id="bankAccountId" name="账户分类id"/>
+                                <#input id="userId" name="用户id"/>
+                                <#input id="bankCard" name="卡号信息"/>
+                                <#input id="qrcode" name="二维码"/>
+                                <#input id="createTime" name=""/>
+                                <#input id="type" name="类型0：用户账号 1：代理商账号"/>
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10 text-center">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BankUserInfoDlg.addSubmit()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BankUserInfoDlg.close()"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="${ctxPath}/static/modular/moneyManage/bankUser/bankUser_info.js"></script>
+@}

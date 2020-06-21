@@ -1,0 +1,86 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>NettySocket客户端</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/socket.io/2.1.1/socket.io.js"></script>
+    <style>
+        body {
+            padding:20px;
+        }
+        #console {
+            height: 300px;
+            overflow: auto;
+        }
+        .username-msg {color:orange;}
+        .connect-msg {color:green;}
+        .disconnect-msg {color:red;}
+        .send-msg {color:#888}
+    </style>
+</head>
+<body>
+<h1>Netty-socketio示例</h1>
+<br/>
+<div id="console" class="well">
+</div>
+<form class="well form-inline" onsubmit="return false;">
+    用户:<input id="name" class="input-xlarge" type="text" value="张三" placeholder="用户名称..."/>
+    内容:<input id="msg" class="input-xlarge" type="text" placeholder="发送内容..."/>
+    <button type="button" onClick="sendMessage()" class="btn">Send</button>
+    <button type="button" onClick="login()" class="btn">login</button>
+    <button type="button" onClick="sendDisconnect()" class="btn">Disconnect</button>
+</form>
+</body>
+<script type="text/javascript">
+    var loginUserNum = '张三';
+    var opts = {
+        query: 'loginUserName=' + loginUserNum
+    };
+    // var socket =  io.connect('socket.xishi.nhys.cdnhxx.com',opts);
+    socket =  io.connect('http://localhost:10107',opts);
+    socket.on('connect', function() {
+        output('<span class="connect-msg">成功连接到服务端!</span>');
+    });
+
+    socket.on('push_all', function(data) {
+        console.log(data)
+        output('<span class="username-msg">' + data.loginUserName + ':</span> ' + data.content);
+    });
+    socket.on('socket_login', function(data) {
+        console.log(data)
+        output('<span class="username-msg">' + data.status + ':</span> ' + data.msg);
+    });
+    socket.on('disconnect', function() {
+        output('<span class="disconnect-msg">The client has disconnected!</span>');
+    });
+    function sendDisconnect() {
+        socket.disconnect();
+    }
+
+    function sendMessage() {
+        var userName = $("#name").val()
+        var message = $('#msg').val();
+        $('#msg').val('');
+        socket.emit('push_all', {loginUserNum: userName, content: message});
+    }
+    function login() {
+        var userId = '1'
+        socket.emit('socket_login', {userId: userId});
+    }
+    function output(message) {
+        var time = '';
+        var oDate = new Date(); //实例一个时间对象；
+        time += oDate.getFullYear() + '-';   //获取系统的年；
+        time += (oDate.getMonth()+1) + '-';   //获取系统月份，由于月份是从0开始计算，所以要加1
+        time += oDate.getDate() + ' '; // 获取系统日，
+        time += oDate.getHours() + ':'; //获取系统时，
+        time += oDate.getMinutes() + ':'; //分
+        time += oDate.getSeconds(); //秒
+
+
+        var currentTime = "<span class='time'>" +  time + "</span>";
+        var element = $("<div>" + currentTime + " " + message + "</div>");
+        $('#console').prepend(element);
+    }
+</script>
+</html>

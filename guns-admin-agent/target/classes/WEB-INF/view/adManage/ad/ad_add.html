@@ -1,0 +1,41 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <form id="validatorForm">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+
+                <input type="hidden" id="id" value="">
+
+                <div class="row">
+                    <div class="col-sm-10">
+                                <#input id="title" name="广告说明"/>
+                                <#select id="location" name="广告位置">
+                                    <option value="">请选择</option>
+                                    <option value="0">首页顶部轮播</option>
+                                    <option value="1">首页固定广告位</option>
+                                    <option value="2">直播页左方1</option>
+                                    <option value="3">直播页左方2</option>
+                                    <option value="4">直播页右方1</option>
+                                    <option value="5">直播页右方2</option>
+                                    <option value="6">启动页</option>
+                                    <option value="7">引导页</option>
+                                </#select>
+                                <#easyupload id="cover" name="广告封面"/>
+                                <#input id="intro" name="简要说明"/>
+                                <#input id="url" name="广告连接地址"/>
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10 text-center">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="AdInfoDlg.addSubmit()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="AdInfoDlg.close()"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="${ctxPath}/static/modular/adManage/ad/ad_info.js"></script>
+@}

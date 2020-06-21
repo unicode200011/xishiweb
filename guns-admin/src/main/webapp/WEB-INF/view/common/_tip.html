@@ -1,0 +1,12 @@
+@layout("/common/_container.html"){
+
+<div class="hr-line-dashed">
+    <input type="hidden" id="tip" value="${msg}">
+    <script>
+        $(function () {
+            var tip = $("#tip").val()
+            Feng.error(tip)
+        })
+    </script>
+</div>
+@}

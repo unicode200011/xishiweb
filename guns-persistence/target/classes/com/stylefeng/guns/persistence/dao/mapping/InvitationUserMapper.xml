@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.persistence.dao.InvitationUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.persistence.model.InvitationUser">
+        <id column="id" property="id"/>
+        <result column="from_uid" property="fromUid"/>
+        <result column="to_uid" property="toUid"/>
+        <result column="code" property="code"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, from_uid, to_uid, code, create_time
+    </sql>
+    <select id="selectMyInviteUser" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM eb_invitation_user
+        WHERE to_uid =#{userId}
+    </select>
+    <select id="selectToUid" resultType="java.lang.String">
+        SELECT count(*)
+        FROM `eb_invitation_user`
+        where from_uid=#{fromUid}
+    </select>
+     <select id="selectInviteUserByFromId" resultType="com.stylefeng.guns.persistence.model.InvitationUser">
+         select
+         <include refid="Base_Column_List"></include>
+         from `eb_invitation_user`
+         where from_uid=#{fromUid}
+     </select>
+    <select id="selectBytoUid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from `eb_invitation_user`
+        where to_uid=#{id}
+
+    </select>
+</mapper>

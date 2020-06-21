@@ -1,0 +1,32 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <#input id="id" name="" value="${item.id}"/>
+                            <#input id="gbAmount" name="账户余额" value="${item.gbAmount}"/>
+                            <#input id="totalGiftAmount" name="收益总额" value="${item.totalGiftAmount}" />
+                            <#input id="agentId" name="代理商id" value="${item.agentId}"/>
+                            <#input id="createTime" name="创建时间" value="${item.createTime}"/>
+                            <#input id="updateTime" name="更新时间" value="${item.updateTime}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 text-center">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="AgentWalletInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="AgentWalletInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/agentManage/agentWallet/agentWallet_info.js"></script>
+@}

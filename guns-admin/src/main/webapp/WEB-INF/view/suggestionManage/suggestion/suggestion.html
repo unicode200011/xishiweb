@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>用户反馈管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+
+                        </div>
+                        <div class="hidden-xs" id="SuggestionTableToolbar" role="group">
+                            @if(shiro.hasPermission("/suggestion/add")){
+                                <#button name="添加" icon="fa-plus" clickFun="Suggestion.openAddSuggestion()"/>
+                            @}
+                            @if(shiro.hasPermission("/suggestion/update")){
+                                <#button name="修改" icon="fa-edit" clickFun="Suggestion.openSuggestionDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/suggestion/delete")){
+                                <#button name="删除" icon="fa-remove" clickFun="Suggestion.delete()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="SuggestionTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/suggestionManage/suggestion/suggestion.js"></script>
+@}

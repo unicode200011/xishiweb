@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.persistence.dao.UserWalletRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.persistence.model.UserWalletRecord">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="amount" property="amount" />
+        <result column="use_type" property="useType" />
+        <result column="type" property="type" />
+        <result column="remark" property="remark" />
+        <result column="create_time" property="createTime" />
+        <result column="link_uid" property="linkUid" />
+        <result column="wallet_amount" property="walletAmount" />
+        <result column="cust_id" property="custId" />
+        <result column="cust_num" property="custNum" />
+        <result column="cust_name" property="custName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        uw.id, uw.user_id as userId, uw.amount, uw.use_type as useType, uw.type, uw.remark,
+         uw.create_time as createTime, uw.link_uid as linkUid, uw.wallet_amount as walletAmount, uw.cust_id as custId,
+          uw.cust_num as custNum, uw.cust_name as custName
+    </sql>
+    <select id="selectUserWalletRecordPage" resultType="com.stylefeng.guns.persistence.model.UserWalletRecord">
+        select
+        u.xishi_num as xishiNum,
+        u2.xishi_num as xishiNum2,
+        u2.belong_agent as agentId,
+        (select agent_name from eb_agent where id = agentId) as agent,
+        (select name from eb_user where id = u.id) as userName,
+        u2.name as linkUName,
+        <include refid="Base_Column_List" />
+        from eb_user_wallet_record uw
+        left join eb_user u on u.id = uw.user_id
+        left join eb_user u2 on u2.id = uw.link_uid
+
+        <where>
+            1=1
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <select id="selectInfos" resultType="com.stylefeng.guns.persistence.model.UserWalletRecord">
+        select
+
+        <include refid="Base_Column_List" />,
+            u.xishi_num as xishiNum2,
+         (select name from eb_user where eb_user.id = uw.link_uid) as userName,
+        (select xishi_num from eb_user where eb_user.id = uw.link_uid) as xishiNum
+        from eb_user_wallet_record as uw LEFT JOIN eb_user as u on uw.user_id = u.id
+        where use_type=0 and type = 2 and user_id = #{userId}
+        <choose>
+            <when test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+                and uw.create_time between #{startTime} and #{endTime}
+            </when>
+            <otherwise>
+                <if test="startTime!=null and startTime!=''">
+                    and uw.create_time &gt; #{startTime}
+                </if>
+                <if test="endTime!=null and endTime!=''">
+                    and uw.create_time &lt; #{endTime}
+                </if>
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="selectUserWalletRecordList" resultType="com.stylefeng.guns.persistence.model.UserWalletRecord">
+        select
+        u.xishi_num as xishiNum,
+        u2.xishi_num as xishiNum2,
+        u2.belong_agent as agentId,
+        (select agent_name from eb_agent where id = agentId) as agent,
+        (select name from eb_user where id = u.id) as userName,
+        u2.name as linkUName,
+        <include refid="Base_Column_List" />
+        from eb_user_wallet_record uw
+        left join eb_user u on u.id = uw.user_id
+        left join eb_user u2 on u2.id = uw.link_uid
+
+        <where>
+            1=1
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <select id="getData" resultType="java.util.Map">
+        select
+        (SELECT COALESCE(sum(xishi_amount),0) FROM eb_charge_record ) as chargeNum,
+
+        (SELECT COALESCE(sum(money),0) FROM eb_withdrawal where state in (1,4) and type in (0,1)) as withNum
+
+    </select>
+
+    <select id="getDayMoney" resultType="BigDecimal">
+        SELECT
+        ( a.addM - reduceM ) as num
+        FROM
+        ( SELECT IFNULL( SUM( xishi_amount ), 0 ) AS addM FROM eb_charge_record WHERE create_time &lt; #{time} ) AS a,
+
+        ( SELECT IFNULL( SUM( money ), 0 ) AS reduceM FROM eb_withdrawal WHERE state IN ( 1, 4 ) and type in (0,1) AND create_time &lt; #{time} ) AS b
+
+    </select>
+
+
+</mapper>

@@ -1,0 +1,70 @@
+@layout("/common/_container.html"){
+<link href="${ctxPath}/static/css/easy-upload.css" rel="stylesheet">
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>消息推送</h5>
+    </div>
+    <form id="giftform">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+
+                <input type="hidden" id="id" value="">
+
+                <div class="row">
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">标题</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="tital" name="tital" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">消息输入</label>
+                            <div class="col-sm-9">
+                                <textarea id="msg" name="msg" cols="40" rows="6" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none">
+                            <label class="col-sm-3  control-label">对象选择</label>
+                            <div class="col-sm-9">
+                                <select disabled class="form-control" name="type" id="type">
+                                    <option value="1">全部用户</option>
+                                    <option value="">--请选择--</option>
+                                    <option value="0">自定义</option>
+                                </select>
+                            </div>
+                            <script>
+                                $(function () {
+                                    $("#self").hide()
+                                })
+                                $("#type").bind("change",function () {
+                                    var val = $("#type").val();
+                                    if(val == 0){
+                                        $("#self").show()
+                                    }else {
+                                        $("#self").hide()
+                                    }
+                                })
+                            </script>
+                        </div>
+                        <div id="self" class="form-group">
+                            <label  class="col-sm-3 control-label">自定义</label>
+                            <div  class="col-sm-9">
+                                <textarea placeholder="请输入用户ID，多个用户用,(英文逗号)隔开" name="userText" id="userText" cols="40" rows="6" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row btn-group-m-t">
+                        <div class="col-sm-8 text-center">
+                            <#button name="发送" icon="fa-edit" clickFun="LiveRecordInfoDlg.sendMsg()" space="true"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="${ctxPath}/static/modular/systemDataSet/sendMsg/goSendMsg.js"></script>
+@}

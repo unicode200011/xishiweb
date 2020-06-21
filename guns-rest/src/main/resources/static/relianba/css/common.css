@@ -1,0 +1,5 @@
+* { margin: 0; padding: 0;}
+body { font-family:'黑体',"微软雅黑"; font-size: 12px; background-color: #5f5956; color: #333333;}
+html,body,div,ol,img,a,span,input,h1,h2,h3,h4,h5,h6,p{ margin:0;border:0;padding:0;font-style:normal;}
+.clear{clear:both;height:0px;width:100%;line-height:0px;visibility:hidden;overflow:hidden;}
+

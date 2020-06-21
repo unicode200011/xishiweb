@@ -1,0 +1,62 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>消费记录列表管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#SelectCon id="source" name="礼物类型">
+                                <option value="">全部</option>
+                                <option value="1">打赏</option>
+                                <option value="7">靓号</option>
+                                <option value="6">坐骑</option>
+                                <option value="5">电影</option>
+                                <option value="8">直播间</option>
+                                </#SelectCon>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <#NameCon id="xishiNum" name="西施号" />
+                            </div>
+                            <div class="col-sm-2">
+                                <#NameCon id="name" name="昵称" />
+                            </div>
+                            <div class="col-sm-4">
+                                <#NameCon id="condition" name="消费时间" />
+                            </div>
+                            <div class="col-sm-1">
+                                <#button name="搜索" icon="fa-search" clickFun="UserWalletRecord.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="UserWalletRecordTableToolbar" role="group">
+                            @if(shiro.hasPermission("/userWalletRecord/add")){
+                                <#button name="添加" icon="fa-plus" clickFun="UserWalletRecord.openAddUserWalletRecord()"/>
+                            @}
+                            @if(shiro.hasPermission("/userWalletRecord/update")){
+                                <#button name="修改" icon="fa-edit" clickFun="UserWalletRecord.openUserWalletRecordDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/userWalletRecord/delete")){
+                                <#button name="删除" icon="fa-remove" clickFun="UserWalletRecord.delete()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="UserWalletRecordTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/moneyManage/userWalletRecord/userWalletRecord.js"></script>
+<script src="/static/js/laydate/laydate.js"></script>
+<script>
+    laydate.render({
+        elem: '#condition'
+        ,range: true
+    });
+</script>
+@}

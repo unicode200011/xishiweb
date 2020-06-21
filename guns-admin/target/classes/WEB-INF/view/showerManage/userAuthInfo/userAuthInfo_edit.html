@@ -1,0 +1,31 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <#input id="name" name="姓名" value="${item.name}"/>
+                            <#input id="idCard" name="身份证" value="${item.idCard}"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 text-center">
+                    @if(item.state == 0){
+                        <#button btnCss="info" name="通过审核" id="ensure" icon="fa-check" clickFun="UserAuthInfoInfoDlg.editSubmit(2)"/>
+                        <#button btnCss="info" name="驳回" id="ensure" icon="fa-remove" clickFun="UserAuthInfoInfoDlg.editSubmit(3)"/>
+                    @}
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="UserAuthInfoInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/showerManage/userAuthInfo/userAuthInfo_info.js"></script>
+@}

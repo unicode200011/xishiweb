@@ -1,0 +1,31 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>家族申请记录管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+
+                        <div class="hidden-xs" id="AgentInviteTableToolbar" role="group">
+                            @if(shiro.hasPermission("/agentInvite/add")){
+                                <#button name="添加" icon="fa-plus" clickFun="AgentInvite.openAddAgentInvite()"/>
+                            @}
+                            @if(shiro.hasPermission("/agentInvite/update")){
+                                <#button name="审核" icon="fa-edit" clickFun="AgentInvite.openAgentInviteDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/agentInvite/delete")){
+                                <#button name="删除" icon="fa-remove" clickFun="AgentInvite.delete()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="AgentInviteTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/agentManage/agentInvite/agentInvite.js"></script>
+@}

@@ -1,0 +1,142 @@
+@layout("/common/_container.html"){
+<style>
+    .blockItem{
+        border:1px solid #bcbfc1a3;
+        border-radius: 10px;
+
+        padding: 5px 2% 6px 2%;
+        min-height: 100px;
+    }
+    /*.blockItem:hover{*/
+    /*	box-shadow: 2px 2px 2px 2px #888888;*/
+    /*}*/
+    .blockItem span{
+        font-size: 19px;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row" style="margin-bottom: 30px;">
+                            <div class="col-sm-3 blockItem">
+                                <h3>主播总数</h3>
+                                <p><span><strong>${indexData.totalShowerNum!0}</strong></span></p>
+                            </div>
+                            <div class="col-sm-3 blockItem">
+                                <h3>当前直播数</h3>
+                                <p><span><strong>${indexData.liveNum!0}</strong></span></p>
+                            </div>
+                            <div class="col-sm-3 blockItem">
+                                <h3>直播总场数</h3>
+                                <p><span><strong>${liveRecordNum!0}</strong></span></p>
+                            </div>
+                            <div class="col-sm-3 blockItem">
+                                <h3>今日收益（西施币）</h3>
+                                <p><span><strong>${indexData.todayAmount!0}</strong></span></p>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 30px;">
+                            <div class="col-sm-3 blockItem">
+                                <h3>当前账户余额（西施币）</h3>
+                                <p><span><strong>${indexData.gbAmount!0}</strong></span></p>
+                            </div>
+                            <div class="col-sm-3 blockItem">
+                                <h3>累计收益（西施币）</h3>
+                                <p><span><strong>${indexData.totalGiftAmount!0}</strong></span></p>
+                            </div>
+                            <div class="col-sm-3 blockItem">
+                                <h3>近七日收益（西施币）</h3>
+                                <p><span><strong>${indexData.sevenAmount!0}</strong></span></p>
+                            </div>
+                            <!--<div class="col-sm-3 blockItem">-->
+                                <!--<h3>已提现（西施币）</h3>-->
+                                <!--<p><span><strong>${indexData.withAmount!0}</strong></span></p>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="row" style="margin-bottom: 50px;">
+                            <div id="main" class="col-sm-7 br"  style="width: 50%;height: 450px">
+
+                            </div>
+                            <div class="col-sm-5">
+                                <h3>推广二维码</h3>
+                                <div>
+                                    <div style="margin: 20% 25%">
+                                        <img  src="http://nahanhb1.oss-cn-qingdao.aliyuncs.com/resources/movie_cover/74cf181b66dd485d8bc1195aa4414aef.png" width="120" height="120" style="margin-bottom: 3%;display: block">
+                                        <input style="margin-left: 5%" type="button" value="保存二维码" class="btn btn-info">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/moneyManage/chargeRecord/chargeRecord.js"></script>
+<script src="/static/js/laydate/laydate.js"></script>
+<script>
+    laydate.render({
+        elem: '#condition'
+        ,range: true
+    });
+</script>
+<script>
+    var charts = [];
+    var main = document.getElementById("main")
+    var myChart = echarts.init(main);
+    option = {
+        title: {
+            text: '历史收益近30日变化情况'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['历史收益']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ${dateStrArr}
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name:'历史收益',
+                type:'line',
+                stack: '总量',
+                data:${dateArr}
+            }
+        ]
+    };
+    myChart.setOption(option);
+    charts.push(myChart);
+    setTimeout(function () {
+        window.onresize = function () {
+            for(var i = 0;i<charts.length;i++){
+                charts[i].resize();
+            }
+        }
+    },200)
+
+</script>
+@}
+

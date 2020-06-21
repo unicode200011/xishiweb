@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="guns-persistence" />
+        <module name="guns-admin-agent" />
+        <module name="guns-entity" />
+        <module name="guns-admin" />
+        <module name="guns-generator" />
+        <module name="guns-core" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="guns" target="1.6" />
+      <module name="guns-admin" target="1.8" />
+      <module name="guns-admin-agent" target="1.8" />
+      <module name="guns-core" target="1.8" />
+      <module name="guns-entity" target="1.8" />
+      <module name="guns-generator" target="1.8" />
+      <module name="guns-parent" target="1.8" />
+      <module name="guns-persistence" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>西施后台系统 - 忘记密码</title>
+    <link rel="shortcut icon" href="${ctxPath}/static/favicon.ico">
+    <link href="${ctxPath}/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${ctxPath}/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="${ctxPath}/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <script>if (window.top !== window.self) {
+        window.top.location = window.location;
+    }</script>
+    <script src="${ctxPath}/static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${ctxPath}/static/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="${ctxPath}/static/js/common/Feng.js"></script>
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <div>
+            <img height="110px" width="110px" src="${ctxPath}/static/img/girl.gif">
+        </div>
+        <h3>忘记密码</h3>
+        <h4 id="edit" style="color:red;display: none">手机号不存在</h4>
+        <form></form>
+        <div class="form-group">
+            <input type="text" id="phone" class="form-control" placeholder="手机号" onblur="validatePhone()"><span id="phoneError" style="color: red;"></span>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-7"><input type="text" class="form-control" placeholder="验证码" id="code" onblur="validateCode()"><span id="codeError" style="color: red;"></span></div>
+                <div class="col-sm-5"><button onclick="getCode(this)" id="btn" class="btn btn-primary" type="button">获取验证码</button></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" class="form-control" onchange="isPassword()" placeholder="请输入密码，8-16位数字、字母组合" required=""><span id="passwordError" style="color: red"></span>
+        </div>
+        <div class="form-group">
+            <input type="password" id="rePassword" class="form-control" placeholder="请再次输入密码" onblur="validateRePwd()"><span id="rePwdError" style="color: red"></span>
+        </div>
+        <button type="submit" class="btn btn-primary block full-width m-b" onclick="forgetPwd()">完成</button>
+        <p class="text-muted text-right"> <a href="/login"><small>返回登录</small></a>
+
+    </div>
+</div>
+
+<!--统计代码，可删除-->
+<script type="text/javascript">
+
+    function validatePhone(){
+        var phone=$("#phone").val();
+        if(!(/^1[345678]\d{9}$/.test(phone))){
+            $("#phoneError").html("请输入正确的手机号");
+            return false;
+        }else{
+            $("#phoneError").html("");
+            return true;
+        }
+    }
+    function validateCode(){
+        var code=$.trim($("#code").val());
+        var phone=$("#phone").val();
+        if(code=="" || code==undefined || code==null){
+            $("#codeError").html("验证码不能为空");
+            return false;
+        }
+        $.post(Feng.ctxPath+"/checkCode",{"code":code,"phone":phone},function (data) {
+            if(data.code == 200){
+                $("#codeError").html("");
+                return true;
+            }else {
+                $("#codeError").html("验证码错误");
+                return false;
+            }
+        })
+        return true
+    }
+    function validateRePwd(){
+        var password=$.trim($("#password").val());
+        var rePwd=$.trim($("#rePassword").val());
+        if(rePwd!==password){
+            $("#rePwdError").html("两次密码不一致");
+            return false;
+        }else{
+            $("#rePwdError").html("");
+            return true;
+        }
+    }
+    function isPassword(){
+        var pass=document.getElementById("password").value;
+        var reg=/^(?![^a-zA-Z]+$)(?!\\D+$).{8,16}$/;
+        var result=reg.test(pass);
+        if(false){
+            $("#passwordError").html("密码由字母+数字，8-16位组成！");
+            return false;
+        }else{
+            $("#passwordError").html("");
+            return true;
+        }
+    }
+    function forgetPwd(){
+        var phone=$("#phone").val();
+        var password=$("#password").val();
+        debugger;
+        if(validatePhone()==true && validateCode()==true && validateRePwd()==true && isPassword()==true){
+            $.post(Feng.ctxPath+'/mgr/forgetPWD',{'pwd':password,'phone':phone},function(data){
+                if(data.code == 200){
+                    window.location.href='/login';
+                }else{
+                    Feng.error(data.msg)
+                    $("#edit").css("display","block");
+                }
+            },'json');
+        }
+
+    }
+
+    /*获取验证码*/
+    function getCode(val) {
+        var phone = $("#phone").val();
+        if(phone === ""){
+            $("#phoneError").html("请输入手机号")
+            return;
+        }
+        if(validatePhone()===false){
+            $("#phoneError").html("请输入正确的手机号");
+            return;
+        }
+        $.post(Feng.ctxPath+"/getCode",{"phone":phone},function (data) {
+                if(data.code == 200){
+                    setTime(val)
+                }else {
+                    console.log(data.msg)
+                    $("#edit").css("display","block");
+                    $("#edit").html(data.msg)
+                }
+        })
+    }
+    let countdown = 59;
+    function setTime(val) {
+        if (countdown === 0) {
+            $(val).prop("disabled", false);
+            $(val).html("获取验证码");
+            countdown = 59;
+        } else {
+            $(val).prop("disabled", true);
+            $(val).html("重新发送(" + countdown + ")");
+            countdown--;
+            setTimeout(function() {
+                setTime(val)
+            },1000)
+        }
+    }
+    $(function () {
+
+    })
+</script>
+</body>
+
+</html>

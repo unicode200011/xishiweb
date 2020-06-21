@@ -1,0 +1,105 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="userInfoForm">
+			
+			<input type="hidden" id="id" value="${adminId}">
+			<input type="hidden" id="sexValue" value="${admin.sex}">
+
+			
+			<div class="row">
+				<div class="row">
+					<div class="col-sm-8">
+						<#input id="name" value="${admin.name}" name="管理员名称"/>
+						<input type="hidden" value="${admin.account}" id="oldaccount">
+						<#input id="account"  value="${admin.account}" name="账号"/>
+
+						<#input id="phone"  value="${admin.phone}" name="手机号码"/>
+
+						<input type="hidden" value="${admin.password}" id="oldPwd">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">密码</label>
+							<div class="col-sm-9">
+								<a role="button" id="changePwd" class="btn btn-info" onclick="changePwd()">修改密码</a>
+							</div>
+						</div>
+						<script>
+							$(function () {
+								$("#pwdDiv").hide()
+							})
+							var type = 1
+							function changePwd() {
+								if(type == 0){
+									type=1
+									$("#changePwd").html("修改密码")
+									$("#password").val("")
+									$("#pwdDiv").hide()
+								}else {
+									type=0
+									$("#changePwd").html("收回")
+									$("#pwdDiv").show()
+								}
+							}
+						</script>
+						<div class="form-group" id="pwdDiv">
+							<label class="col-sm-3 control-label">密码</label>
+							<div class="col-sm-9">
+								<input class="form-control"  placeholder="请输入密码"  id="password" name="password" type="password">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">状态</label>
+							<input type="hidden" id="status">
+							<div class="col-sm-8">
+								<select style="appearance:none; -webkit-appearance:none;" class="form-control" name="Astatus" id="Astatus">
+									<option value="1"
+									@if(admin.status == 1){
+											selected
+											@}
+									>开启</option>
+									<option value="2"
+											@if(admin.status == 2){
+											selected
+											@}
+									>禁用</option>
+								</select>
+							</div>
+							<script>
+                                $("#Astatus").bind("change",function () {
+                                    var status = $("#Astatus option:selected").val();
+                                    $("#status").val(status);
+                                })
+							</script>
+						</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">角色</label>
+								<div class="col-sm-9">
+									<select  class="selectpicker show-tick  form-control" multiple data-style="btn-default" id="roleidSele" name="roleid">
+										@for(role in allRoles){
+										<option value="${role.id}"
+												@for(id in roleids){
+												@if(id == role.id){
+												selected
+												@}
+												@}
+										>${role.name}</option>
+										@}
+									</select>
+								</div>
+							</div>
+
+					</div>
+				</div>
+
+			<div class="row btn-group-m-t">
+				<div class="col-sm-10">
+					<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="UserInfoDlg.editSubmit()"/>
+					<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="UserInfoDlg.close()"/>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script src="${ctxPath}/static/modular/system/admin/user_info.js"></script>
+@}

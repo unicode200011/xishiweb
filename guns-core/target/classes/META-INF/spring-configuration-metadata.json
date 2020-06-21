@@ -1,0 +1,155 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.stylefeng.guns.core.mutidatasource.config.MutiDataSourceProperties",
+      "name": "guns.muti-datasource",
+      "type": "com.stylefeng.guns.core.mutidatasource.config.MutiDataSourceProperties"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "name": "spring.datasource",
+      "type": "com.stylefeng.guns.core.datasource.DruidProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.stylefeng.guns.core.mutidatasource.config.MutiDataSourceProperties",
+      "defaultValue": "dataSourceGuns",
+      "name": "guns.muti-datasource.default-data-source-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.mutidatasource.config.MutiDataSourceProperties",
+      "defaultValue": "com.mysql.jdbc.Driver",
+      "name": "guns.muti-datasource.driver-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.mutidatasource.config.MutiDataSourceProperties",
+      "defaultValue": "root",
+      "name": "guns.muti-datasource.password",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.mutidatasource.config.MutiDataSourceProperties",
+      "defaultValue": "jdbc:mysql:\/\/127.0.0.1:3306\/biz?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull",
+      "name": "guns.muti-datasource.url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.mutidatasource.config.MutiDataSourceProperties",
+      "defaultValue": "root",
+      "name": "guns.muti-datasource.username",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.mutidatasource.config.MutiDataSourceProperties",
+      "defaultValue": "SELECT 'x'",
+      "name": "guns.muti-datasource.validation-query",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": "com.mysql.jdbc.Driver",
+      "name": "spring.datasource.driver-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": "stat",
+      "name": "spring.datasource.filters",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": 2,
+      "name": "spring.datasource.initial-size",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": 20,
+      "name": "spring.datasource.max-active",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": 20,
+      "name": "spring.datasource.max-pool-prepared-statement-per-connection-size",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": 60000,
+      "name": "spring.datasource.max-wait",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": 300000,
+      "name": "spring.datasource.min-evictable-idle-time-millis",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": 1,
+      "name": "spring.datasource.min-idle",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": "root",
+      "name": "spring.datasource.password",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": true,
+      "name": "spring.datasource.pool-prepared-statements",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": false,
+      "name": "spring.datasource.test-on-borrow",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": false,
+      "name": "spring.datasource.test-on-return",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": true,
+      "name": "spring.datasource.test-while-idle",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": 60000,
+      "name": "spring.datasource.time-between-eviction-runs-millis",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": "jdbc:mysql:\/\/127.0.0.1:3306\/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull",
+      "name": "spring.datasource.url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": "root",
+      "name": "spring.datasource.username",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.stylefeng.guns.core.datasource.DruidProperties",
+      "defaultValue": "SELECT 'x'",
+      "name": "spring.datasource.validation-query",
+      "type": "java.lang.String"
+    }
+  ]
+}

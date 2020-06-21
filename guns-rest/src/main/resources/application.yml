@@ -1,0 +1,51 @@
+spring:
+  profiles:
+    active: dev
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    username: 577746010@qq.com
+    password: xovmrhlxlbubbecg
+    port: 465
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.socketFactory.fallback: false
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+
+jwt:
+  header: Authorization   #http请求头所需要的字段
+  secret: jsecretwt        #jwt秘钥
+  expiration: 604800      #7天 单位:秒
+  auth-path: auth         #认证请求的路径
+  md5-key: randomKeySm     #md5加密混淆key
+  token-key: DN-AUTH-SESSION
+  fixing: false # true维护中 false 正常
+
+## pageHelper ##
+pagehelper:
+    helperDialect: mysql
+    reasonable: false
+    supportMethodsArguments: true
+    params: count=countSql
+
+
+## 推送 ##
+push:
+  secret: 0f75e718a0115c33b789d544
+  key: 587a5f5cb7030e038e91a438
+
+mybatis-plus:
+  mapper-locations: classpath*:com/stylefeng/guns/persistence/dao/mapping/*.xml
+  typeAliasesPackage: com.stylefeng.guns.persistence.model
+  global-config:
+    id-type: 0  #0:数据库ID自增   1:用户输入id  2:全局唯一id(IdWorker)  3:全局唯一ID(uuid)
+    db-column-underline: false
+    refresh-mapper: true
+  configuration:
+    map-underscore-to-camel-case: false
+    cache-enabled: true #缓存
+    lazyLoadingEnabled: true #延时加载
+    multipleResultSetsEnabled: true
