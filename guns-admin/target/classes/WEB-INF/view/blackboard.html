@@ -1,0 +1,268 @@
+@layout("/common/_container.html"){
+<style>
+	.blockItem{
+		border:1px solid #bcbfc1a3;
+		border-radius: 10px;
+		margin-left: 5%;
+		padding: 5px 2% 6px 2%;
+		min-height: 100px;
+	}
+	.blockItem2{
+		border:1px solid #bcbfc1a3;
+		border-radius: 10px;
+
+		padding: 5px 2% 6px 2%;
+		min-height: 100px;
+		margin-left: 25%;
+	}
+	/*.blockItem:hover{*/
+	/*	box-shadow: 2px 2px 2px 2px #888888;*/
+	/*}*/
+	.blockItem  span{
+		font-size: 19px;
+	}
+	.blockItem2  span{
+		font-size: 19px;
+	}
+</style>
+<div class="row">
+
+	<div class="col-sm-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-content">
+				<div class="row row-lg">
+					<div class="col-sm-12">
+						<div class="row" style="margin-bottom: 30px;">
+							<div class="col-sm-3 blockItem">
+								<h3>充值总额(元)</h3>
+								<p><span><strong>${indexData.chargeNum!0}</strong></span></p>
+							</div>
+							<div class="col-sm-3 blockItem2">
+								<h3>消耗总额(西施币)</h3>
+								<p><span><strong>${indexData.giveNum!0}</strong></span></p>
+							</div>
+						</div>
+						<div class="row" style="margin-bottom: 30px;">
+							<div class="col-sm-3 blockItem">
+								<h3>注册用户总量</h3>
+								<p><span><strong>${indexData.totalUserNum!0}</strong></span></p>
+							</div>
+							<div class="col-sm-3 blockItem2">
+								<h3>主播总数</h3>
+								<p><span><strong>${indexData.totalShowerNum!0}</strong></span></p>
+							</div>
+						</div>
+						<div class="row" style="margin-bottom: 30px;">
+							<div class="col-sm-3 blockItem">
+								<h3>用户访问总量</h3>
+								<p><span><strong>${userLoginNum!0}</strong></span></p>
+							</div>
+							<div class="col-sm-3 blockItem2">
+								<h3>开播总量</h3>
+								<p><span><strong>${indexData.liveNum!0}</strong></span></p>
+							</div>
+
+						</div>
+						<div class="row" style="margin-bottom: 30px;">
+							<div class="col-sm-3 blockItem">
+								<h3>直播观看总数</h3>
+								<p><span><strong>${indexData.watchNum!0}</strong></span></p>
+							</div>
+							<div class="col-sm-3 blockItem2">
+								<h3>家族总数</h3>
+								<p><span><strong>${indexData.agentNum!0}</strong></span></p>
+							</div>
+						</div>
+
+						<div class="row" >
+							<h3>代理商审核数据</h3>
+							<table class="table table-bordered">
+								<thead>
+								<tr>
+									<th>申请总量</th><th>审核总量</th><th>今日审核数量</th><th>昨日审核数量</th><th>待审量</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>${indexData.applyAgentNum!0}</td><td>${indexData.auditAgentNum!0}</td><td>${indexData.TauditAgentNum!0}</td><td>${indexData.YauditAgentNum!0}</td><td>${indexData.waitgentNum!0}</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="row" >
+							<div class="col-sm-6 b-r">
+								<h3>历史热门主播</h3>
+								@for(hot in hotShower){
+								<div style="display: flex;min-height: 90px;">
+									<div>
+										<img src='${hot.avatar}' width="70" height="70">
+									</div>
+									<div>
+										<p>${hot.name}</p>
+										<p>${hot.totalLiveWatch}观看总量</p>
+									</div>
+								</div>
+								@}
+
+							</div>
+							<div class="col-sm-6">
+								<h3>推广二维码</h3>
+								<div>
+									<div style="margin: 20% 25%">
+										<img  src="http://nahanhb1.oss-cn-qingdao.aliyuncs.com/resources/movie_cover/74cf181b66dd485d8bc1195aa4414aef.png" width="120" height="120" style="margin-bottom: 3%;display: block">
+										<input style="margin-left: 5%" type="button" value="保存二维码" class="btn btn-info">
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="col-sm-12">
+		<div class="col-sm-12 b-r">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<div class="row row-lg">
+						<div class="col-sm-12">
+
+							<div class="row" style="margin-bottom: 50px;">
+								<div id="main" style="width: 100%;height: 450px">
+
+								</div>
+								<div id="main2" style="width: 100%;height: 450px">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+</div>
+<script src="${ctxPath}/static/modular/moneyManage/chargeRecord/chargeRecord.js"></script>
+<script src="/static/js/laydate/laydate.js"></script>
+<script>
+	laydate.render({
+		elem: '#condition'
+		,range: true
+	});
+</script>
+<script>
+	var charts = [];
+	var main = document.getElementById("main")
+	var main2 = document.getElementById("main2")
+	var myChart = echarts.init(main);
+	var myChart2 = echarts.init(main2);
+	option = {
+		title: {
+			text: '充值金额 & 消耗西施币'
+		},
+		tooltip: {
+			trigger: 'axis'
+		},
+		legend: {
+			data:['充值金额','消耗西施币']
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		toolbox: {
+			feature: {
+				saveAsImage: {}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			boundaryGap: false,
+			data: ${dateStrArr}
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [
+			{
+				name:'充值金额',
+				type:'line',
+				stack: '总量',
+				data:${chargeDataArr}
+			},
+			{
+				name:'消耗西施币',
+				type:'line',
+				stack: '总量',
+				data:${giveDataArr}
+			}
+		]
+	};
+	myChart.setOption(option);
+	option = {
+		title: {
+			text: '注册量 & 访客量'
+		},
+		tooltip: {
+			trigger: 'axis'
+		},
+		legend: {
+			data:['注册量','访客量']
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		toolbox: {
+			feature: {
+				saveAsImage: {}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			boundaryGap: false,
+			data: ${dateStrArr}
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [
+			{
+				name:'注册量',
+				type:'line',
+				stack: '总量',
+				data:${registDataArr}
+			},
+			{
+				name:'访客量',
+				type:'line',
+				stack: '总量',
+				data:${visitDataArr}
+			}
+		]
+	};
+	myChart2.setOption(option);
+	charts.push(myChart);
+	charts.push(myChart2);
+	setTimeout(function () {
+		window.onresize = function () {
+			for(var i = 0;i<charts.length;i++){
+				charts[i].resize();
+			}
+		}
+	},200)
+
+</script>
+@}
+

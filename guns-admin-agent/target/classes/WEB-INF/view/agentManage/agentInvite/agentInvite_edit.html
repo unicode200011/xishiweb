@@ -1,0 +1,31 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <#input readonly="readonly" id="name" name="申请用户名" value="${item.name}"/>
+                            <#input readonly="readonly" id="xishiNum" name="西施号" value="${item.xishiNum}"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 text-center">
+                    @if(item.joinState == 0){
+                    <#button btnCss="info" name="通过" id="ensure" icon="fa-check" clickFun="AgentInviteInfoDlg.editSubmit(1)"/>
+                    <#button btnCss="info" name="拒绝" id="ensure" icon="fa-check" clickFun="AgentInviteInfoDlg.editSubmit(2)"/>
+                    @}
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="AgentInviteInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/agentManage/agentInvite/agentInvite_info.js"></script>
+@}

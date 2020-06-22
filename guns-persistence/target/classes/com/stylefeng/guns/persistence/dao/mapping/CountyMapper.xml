@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.persistence.dao.CountyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.persistence.model.County">
+        <id column="county_id" property="countyId" />
+        <result column="county" property="county" />
+        <result column="city_id" property="cityId" />
+        <result column="zip_code" property="zipCode" />
+        <result column="code" property="code" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        county_id, county, city_id, zip_code, code
+    </sql>
+    <select id="selectCountyList" resultType="com.stylefeng.guns.persistence.model.County">
+        select
+        c.county_id as countyId,
+        c.county,
+        c.code,
+        c.zip_code as zipCode,
+        p.province,
+        ci.city
+        from county c
+        left join city ci on ci.city_id = c.city_id
+        left join province p on ci.province_id = p.province_id
+        <where>
+            1=1
+            ${ew.sqlSegment}
+        </where>
+
+    </select>
+
+</mapper>

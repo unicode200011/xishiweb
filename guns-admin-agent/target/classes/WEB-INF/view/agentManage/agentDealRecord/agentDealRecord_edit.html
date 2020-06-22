@@ -1,0 +1,32 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <#input id="id" name="" value="${item.id}"/>
+                            <#input id="agentId" name="代理商id" value="${item.agentId}"/>
+                            <#input id="adminId" name="处理人" value="${item.adminId}" />
+                            <#input id="remark" name="处理备注" value="${item.remark}"/>
+                            <#input id="createTime" name="申请时间" value="${item.createTime}"/>
+                            <#input id="updateTime" name="处理时间" value="${item.updateTime}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 text-center">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="AgentDealRecordInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="AgentDealRecordInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/agentManage/agentDealRecord/agentDealRecord_info.js"></script>
+@}

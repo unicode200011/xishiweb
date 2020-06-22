@@ -1,0 +1,40 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <#input id="id" name="" value="${item.id}"/>
+                            <#input id="userId" name="" value="${item.userId}"/>
+                            <#input id="amount" name="消费总金额" value="${item.amount}"/>
+                            <#input id="useType" name="收支方式:0-收入 1-支出" value="${item.useType}"/>
+                            <#input id="type" name="消费类型:  
+0.充值+  
+1.送礼物-  2.获得礼物+ 3：观看常规收费直播 4观看计时收费直播 5:看电影 6：坐骑 7：靓号" value="${item.type}"/>
+                            <#input id="remark" name="备注" value="${item.remark}" />
+                            <#input id="createTime" name="" value="${item.createTime}"/>
+                            <#input id="linkUid" name="收支对象 用户id" value="${item.linkUid}"/>
+                            <#input id="walletAmount" name="插入记录时用户钱包余额" value="${item.walletAmount}"/>
+                            <#input id="custId" name="送礼物时 保存的礼物id  直播时的 直播间id" value="${item.custId}"/>
+                            <#input id="custNum" name="消费数量 礼物个数 计时模式 分钟数" value="${item.custNum}"/>
+                            <#input id="custName" name="消费的对象名字 如礼物名  直播间名字" value="${item.custName}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 text-center">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="UserWalletRecordInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="UserWalletRecordInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/moneyManage/userWalletRecord/userWalletRecord_info.js"></script>
+@}

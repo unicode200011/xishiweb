@@ -1,0 +1,63 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>代理商管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#SelectCon id="auditState" name="审核状态">
+                                    <option value="">全部</option>
+                                    <option value="0">待审核</option>
+                                    <option value="1">通过</option>
+                                    <option value="2">驳回</option>
+                                </#SelectCon>
+                            </div>
+                            <div class="col-sm-3">
+                                <#SelectCon id="state" name="账户状态">
+                                <option value="">全部</option>
+                                <option value="0">正常</option>
+                                <option value="1">已禁用</option>
+                            </#SelectCon>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <#NameCon id="agentName" name="代理商名称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="agentPhone" name="手机号" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="Agent.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="AgentTableToolbar" role="group">
+                            @if(shiro.hasPermission("/agent/add")){
+                                <#button name="添加账号" icon="fa-plus" clickFun="Agent.openAddAgent()"/>
+                            @}
+                            @if(shiro.hasPermission("/agent/start")){
+                            <#button name="账户启用" icon="fa-plus" clickFun="Agent.start()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/agent/stop")){
+                                <#button name="账户禁用" icon="fa-remove" clickFun="Agent.stop()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/agent/update")){
+                                <#button name="审核" icon="fa-edit" clickFun="Agent.openAgentDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/agent/check")){
+                                <#button name="查看" icon="fa-edit" clickFun="Agent.openAgentDetail()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="AgentTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/agentManage/agent/agent.js"></script>
+@}

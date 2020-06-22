@@ -1,0 +1,69 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>电影管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#SelectCon id="source" name="上传渠道">
+                                    <option value="">全部</option>
+                                    <option value="0">平台</option>
+                                    <option value="1">代理商</option>
+                                </#SelectCon>
+                            </div>
+                            <div class="col-sm-3">
+                                <#SelectCon id="cate" name="电影分类">
+                                    <option value="">全部</option>
+                                @for(cate in cates){
+                                    <option value="${cate.id}">${cate.name}</option>
+                                @}
+                                </#SelectCon>
+                            </div>
+                            <div class="col-sm-3">
+                                <#SelectCon id="state" name="当前状态">
+                                    <option value="">全部</option>
+                                    <option value="0">正常</option>
+                                    <option value="1">已下架</option>
+                                </#SelectCon>
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="name" name="电影名称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="uploader" name="上传人" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="Movie.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="MovieTableToolbar" role="group">
+                            @if(shiro.hasPermission("/movie/add")){
+                                <#button name="添加" icon="fa-plus" clickFun="Movie.openAddMovie()"/>
+                            @}
+                            @if(shiro.hasPermission("/movie/update")){
+                                <#button name="修改" icon="fa-edit" clickFun="Movie.openMovieDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/movie/delete")){
+                                <#button name="删除" icon="fa-remove" clickFun="Movie.delete()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/movie/stop")){
+                                <#button name="下架" icon="fa-remove" clickFun="Movie.stop()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/movie/start")){
+                                <#button name="上架" icon="fa-edit" clickFun="Movie.start()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="MovieTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/movieManage/movie/movie.js"></script>
+@}

@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <#input id="id" name="" value="${item.id}"/>
+                            <#input id="bankAccountId" name="账户分类id" value="${item.bankAccountId}"/>
+                            <#input id="userId" name="用户id" value="${item.userId}"/>
+                            <#input id="bankCard" name="卡号信息" value="${item.bankCard}" />
+                            <#input id="qrcode" name="二维码" value="${item.qrcode}"/>
+                            <#input id="createTime" name="" value="${item.createTime}"/>
+                            <#input id="type" name="类型0：用户账号 1：代理商账号" value="${item.type}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 text-center">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BankUserInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BankUserInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/moneyManage/bankUser/bankUser_info.js"></script>
+@}

@@ -1,0 +1,22 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>数据列表</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="hidden-xs" id="DataSetTableToolbar" role="group">
+                                <#button name="编辑" icon="fa-plus" clickFun="DataSet.openAddDataSet()"/>
+                        </div>
+                        <#table id="DataSetTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/systemDataSet/commonParams/dataSet.js"></script>
+@}

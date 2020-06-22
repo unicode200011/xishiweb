@@ -1,0 +1,114 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <form id="dataSetForm">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+                <input type="hidden" id="id" value="${item.id}">
+                <input type="hidden" id="contentType" value="${item.contentType}">
+                <div class="col-sm-10">
+                    <div class="form-group">
+                        <label class="col-sm-3  control-label">标题</label>
+                        <div class="col-sm-8">
+                            <input disabled="disabled" class="form-control" value="${item.description}" id="name"
+                                   name="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">内容</label>
+                        <div class="col-sm-9" id="QQ_box">
+                            <input type="button" class="btn btn-info" onclick="addQQ()" value="增加QQ号">
+                                <div id="qq_item" class="qq_item row">
+                                    @for(qq in split){
+                                    <div class="qq_item_index col-sm-4"
+                                         style="display: flex;justify-content: space-around;align-items: center;margin-top: 5px">
+                                        <input class="form-control" name="qq" value="${qq}" placeholder="填写QQ号">
+                                        <div style="margin-left: 5px">
+                                            <input type="button" class="btn btn-info deleteBtn"
+                                                   onclick="deleteQQ(this)" value="-"/>
+                                        </div>
+                                    </div>
+                                    @}
+                                </div>
+                        </div>
+                        <div id="qq_item_hidden" style="display: none" class="qq_item_hidden row">
+                            <div class="qq_item_index col-sm-4"
+                                 style="display: flex;justify-content: space-around;align-items: center;margin-top: 5px">
+                                <input class="form-control" name="qq"  placeholder="填写QQ号">
+                                <div style="margin-left: 5px">
+                                    <input type="button" class="btn btn-info deleteBtn"
+                                           onclick="deleteQQ(this)" value="-"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10 text-center">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="doEditSubmit()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="DataSet.close()"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script src="${ctxPath}/static/modular/systemDataSet/commonParams/dataSet.js"></script>
+<script>
+    var qq_item_index = $(".qq_item_hidden").html()
+    function addQQ() {
+        var qqs = $("#QQ_box").find("input[name='qq']")
+        if(qqs.length == 3){
+            Feng.error("最多添加三个QQ号")
+            return
+        }
+        $("#qq_item").append(qq_item_index)
+    }
+
+    function deleteQQ(e) {
+        var qqs = $("#QQ_box").find("input[name='qq']")
+        if(qqs.length == 1){
+            Feng.error("至少添加1个QQ号")
+            return
+        }
+        $(e).parents(".qq_item_index").remove()
+    }
+    function doEditSubmit() {
+        var qqs = $("#QQ_box").find("input[name='qq']")
+        var flag = true;
+        $.each(qqs,function (i,n) {
+           var qq = $(qqs[i]).val()
+            if(qq == ""){
+                flag = false;
+            }
+        })
+        if(!flag){
+            Feng.error("请完整填写添加的QQ号")
+            return
+        }
+        var sum = '';
+        for (var i = 0; i <= qqs.length - 1; i++) {
+            sum += $(qqs[i]).val();
+            if (i < qqs.length - 1) {
+                sum += '*';
+            }
+        }
+
+        debugger
+
+        var ajax = new $ax(Feng.ctxPath + "/systemDataSet/editDataSet", function (data) {
+            Feng.success("编辑成功!");
+            window.location = Feng.ctxPath + '/systemDataSet/dataSet'
+        }, function (data) {
+            Feng.error("编辑失败!");
+        });
+        ajax.set("id",$("#id").val());
+        ajax.set("description",$("#name").val());
+        ajax.set("value",sum);
+        ajax.start();
+    }
+
+</script>
+
+
+@}

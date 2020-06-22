@@ -1,0 +1,42 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <#input id="id" name="" value="${item.id}"/>
+                            <#input id="liveId" name="直播id" value="${item.liveId}"/>
+                            <#input id="cover" name="直播封面" value="${item.cover}"/>
+                            <#input id="name" name="直播标题" value="${item.name}"/>
+                            <#input id="liveWatchNow" name="当前观看人数" value="${item.liveWatchNow}"/>
+                            <#input id="liveWatchTotal" name="本场总管看人数" value="${item.liveWatchTotal}"/>
+                            <#input id="showerName" name="主播名字" value="${item.showerName}"/>
+                            <#input id="showTime" name="已开播时长 分钟" value="${item.showTime}" />
+                            <#input id="amount" name="本场直播当前总贡献量" value="${item.amount}"/>
+                            <#input id="state" name="直播状态 0：正在直播 1：直播结束" value="${item.state}"/>
+                            <#input id="liveMode" name="直播模式 0：免费 1：密码模式 2：常规收费  3：计时收费" value="${item.liveMode}"/>
+                            <#input id="livePrice" name="直播收费价格 收费模式有效  " value="${item.livePrice}"/>
+                            <#input id="createTime" name="开始时间" value="${item.createTime}"/>
+                            <#input id="endTime" name="结束时间" value="${item.endTime}"/>
+                            <#input id="livePwd" name="密码  密码模式有效" value="${item.livePwd}"/>
+                            <#input id="userId" name="用户id " value="${item.userId}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 text-center">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="LiveRecordInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="LiveRecordInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/liveManage/liveRecord/liveRecord_info.js"></script>
+@}

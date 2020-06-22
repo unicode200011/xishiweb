@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.persistence.dao.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.persistence.model.User">
+        <id column="id" property="id" />
+        <result column="phone" property="phone" />
+        <result column="password" property="password" />
+        <result column="salt" property="salt" />
+        <result column="name" property="name" />
+        <result column="avatar" property="avatar" />
+        <result column="city" property="city" />
+        <result column="province" property="province" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age" />
+        <result column="intro" property="intro" />
+        <result column="pay_pwd" property="payPwd" />
+        <result column="state" property="state" />
+        <result column="qq" property="qq" />
+        <result column="wx" property="wx" />
+        <result column="birthday" property="birthday" />
+        <result column="source" property="source" />
+        <result column="machine" property="machine" />
+        <result column="login_time" property="loginTime" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="version" property="version" />
+        <result column="xishi_num" property="xishiNum" />
+        <result column="online_state" property="onlineState" />
+        <result column="weight_sort" property="weightSort" />
+        <result column="recommended" property="recommended" />
+        <result column="belong_agent" property="belongAgent" />
+        <result column="apply_status" property="applyStatus" />
+        <result column="registered_state" property="registeredState" />
+        <result column="apply_status_time" property="applyStatusTime" />
+        <result column="shower" property="shower" />
+        <result column="user_level" property="userLevel" />
+        <result column="live_level" property="liveLevel" />
+        <result column="is_create_agent" property="isCreateAgent" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, phone, password, salt, name, avatar, city, province, gender, age, intro, pay_pwd, state, qq, wx, birthday, source, machine, login_time, create_time, update_time, version, xishi_num, online_state, weight_sort, recommended, belong_agent, apply_status, registered_state, apply_status_time, shower, user_level, live_level,is_create_agent
+    </sql>
+    <select id="selectAgentShowerPage" resultType="com.stylefeng.guns.persistence.model.User">
+        select
+        u.id,
+        ai.id as inviteId,
+        u.xishi_num as xishiNum,
+        u.name,
+        u.state,
+        u.phone,
+        u.live_level as liveLevel,
+        (select IFNULL(sum(amount),0) from eb_user_wallet_record where use_type = 0 and user_id = u.id and type in (1,2,3,4) ) as giftAmount,
+        --uw.gift_amount as giftAmount,
+        uw.gb_moeny as gbMoeny,
+        (select IFNULL(sum(money),0) from eb_withdrawal where state in (1,4) and type = 2 and user_id = u.id) as withdrawNum,
+        IFNULL(ai.join_state,3) as joinState,
+        l.total_live_time as totalTime
+        from eb_user u
+        left join eb_agent_invite ai on u.belong_agent = ai.agent_id and u.id = ai.user_id
+        left join eb_user_wallet uw on uw.user_id = u.id
+        left join eb_live l on l.user_id = u.id
+        <where>
+            1=1
+            ${ew.sqlSegment}
+        </where>
+
+    </select>
+
+</mapper>

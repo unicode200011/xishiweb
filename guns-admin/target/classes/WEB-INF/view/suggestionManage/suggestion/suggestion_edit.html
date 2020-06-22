@@ -1,0 +1,36 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <#input id="id" name="" value="${item.id}"/>
+                            <#input id="userId" name="反馈用户ID" value="${item.userId}"/>
+                            <#input id="typeId" name="类型ID" value="${item.typeId}"/>
+                            <#input id="adminId" name="管理员ID" value="${item.adminId}"/>
+                            <#input id="content" name="反馈内容" value="${item.content}" />
+                            <#input id="state" name="状态 0 待处理 1 已处理 2 删除" value="${item.state}"/>
+                            <#input id="firstRepContent" name="回复内容1" value="${item.firstRepContent}"/>
+                            <#input id="secondRepContent" name="回复内容2" value="${item.secondRepContent}"/>
+                            <#input id="createTime" name="创建时间" value="${item.createTime}"/>
+                            <#input id="updateTime" name="修改时间" value="${item.updateTime}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 text-center">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="SuggestionInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="SuggestionInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/suggestionManage/suggestion/suggestion_info.js"></script>
+@}

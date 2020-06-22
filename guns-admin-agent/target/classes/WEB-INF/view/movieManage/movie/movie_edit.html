@@ -1,0 +1,42 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+   <form id="validatorForm">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-10">
+
+                    <#input id="name" name="名称" value="${item.name}" />
+                    <#easyupload id="cover" value="${item.cover}" valueType="image" name="封面图片"/>
+                    <#input id="price" name="价格" value="${item.price}"/>
+                    <#easyupload id="url" value="${item.url}" valueType="video" name="电影"/>
+                    <#select id="cateId" name="分类名称">
+                        <option value="">请选择</option>
+                        @for(cate in cates){
+                        <option value="${cate.id}"
+                        @if(item.cateId == cate.id){
+                                selected
+                                @}
+                        >${cate.name}</option>
+                        @}
+                    </#select>
+                <#textarea id="remark" maxlength="150" value="${item.remark}" name="电影简介"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 text-center">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="MovieInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="MovieInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </form>
+</div>
+<script src="${ctxPath}/static/modular/movieManage/movie/movie_info.js"></script>
+@}
